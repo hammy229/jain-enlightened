@@ -4,6 +4,16 @@ A multilingual learning platform for Jain philosophy. It has a Laravel website w
 
 **Live site:** [www.jainenlightened.org](http://www.jainenlightened.org/)
 
+## Screenshots
+
+| Home | Lessons |
+|---|---|
+| ![Jain Enlightened home page](docs/screenshots/home.png) | ![Lessons page with language filter](docs/screenshots/lessons.png) |
+
+| Blogs | Research |
+|---|---|
+| ![Blogs page](docs/screenshots/blogs.png) | ![Research page with books and publishing](docs/screenshots/research.png) |
+
 ## Features
 
 - Lessons, which can be filtered by language
