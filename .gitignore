@@ -1,0 +1,66 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.pem
+*.key
+*.p12
+*.pfx
+*.mobileprovision
+google-services.json
+GoogleService-Info.plist
+credentials.json
+service-account.json
+.secrets/
+secrets/
+
+# Database dumps
+*.sql
+*.dump
+
+# Archives and logs
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.log
+
+# Dependencies and build outputs
+vendor/
+node_modules/
+Pods/
+/mobile/build/
+/web/build/
+DerivedData/
+*.apk
+*.aab
+*.ipa
+
+# Laravel runtime state (uploads, sessions, caches, compiled views)
+web/storage/*
+!web/storage/**/
+!web/storage/**/.gitignore
+web/bootstrap/cache/*
+!web/bootstrap/cache/.gitignore
+
+# Public uploads (theme assets are committed, user uploads are not)
+web/public/storage
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Extra hardening
+*.map
+*.bak
+*.sqlite
+.claude/
+.idea/
+.vscode/
+__pycache__/
+FORK_REPORT.md
+SANITIZATION_REPORT.md
