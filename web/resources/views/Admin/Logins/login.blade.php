@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Jain Enlightened | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{URL::asset('package_assets/images/Logo/Logo.png')}}">
+
+    <!-- third party css -->
+    <link href="{{URL::asset('package_assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset('package_assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset('package_assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset('package_assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
+
+    <!-- App css -->
+    <link rel="stylesheet" href="{{URL::asset('package_assets/css/app.min.css')}}"/>
+    <link rel="stylesheet" href="{{URL::asset('package_assets/css/style.css')}}"/>
+
+    <!-- icons -->
+    <link rel="stylesheet" href="{{URL::asset('package_assets/css/icons.min.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Toastr Css -->
+    <link rel="stylesheet" href="{{URL::asset('package_assets/libs/toastr/build/toastr.min.css')}}" />
+
+    <!-- Custom Css -->
+    <style>
+        .pass-show{
+            position: absolute;
+            top: 4px;
+            font-size: 16px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .input-box{
+            position: relative;
+        }
+        .header {
+            color:#f6bf60;
+        }
+    </style>
+</head>
+
+<body class="loading authentication-bg authentication-bg-pattern">
+    <div class="account-pages my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <div class="text-center">
+                        <a href="">
+                            <img src="{{URL::asset('package_assets/images/Logo/Logo.png')}}" alt="Jain Enlightened" height="100" class="mx-auto">
+                        </a>
+                        <h3 class="header mt-2 mb-2">Jain Enlightened</h3>
+                    </div>
+                    <div class="card">
+
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <h4 class="text-uppercase mt-0">Login In</h4>
+                            </div>
+
+                            <form action="{{ url('login-action') }}" method="post" id="loginForm">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter your email">
+                                    @if($errors->has('email'))
+                                        <span class="text-danger"><b>* {{$errors->first('email')}}</b></span>
+                                    @endif
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-box">
+                                        <input class="form-control" type="password" id="password" name="password" placeholder="Enter your password">
+                                        <div class="pass-show"><i class="fa-solid fa-eye fa-sm"></i></div>
+                                    </div>
+                                    @if($errors->has('password'))
+                                        <span class="text-danger"><b>* {{$errors->first('password')}}</b></span>
+                                    @endif
+                                </div>
+
+                                <div class="d-grid text-center">
+                                    <button class="btn btn-add" type="submit"> Log In </button>
+                                </div>
+                            </form>
+
+
+                            <div class="row mt-3">
+                                <div class="col-12 text-center">
+                                    <p> <a href="{{ url('/forget-password') }}" class="text-muted ms-1"><i class="fa fa-lock me-1"></i>Forgot your password?</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor -->
+    <script src="{{ URL::asset('package_assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('package_assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::asset('package_assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ URL::asset('package_assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ URL::asset('package_assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ URL::asset('package_assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
+    <script src="{{ URL::asset('package_assets/libs/feather-icons/feather.min.js') }}"></script>
+
+    <!-- icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- App js -->
+    <script src="{{ URL::asset('package_assets/js/app.min.js') }}"></script>
+
+    <!-- Toaster Js -->
+    <script src="{{ URL::asset('package_assets/libs/toastr/build/toastr.min.js') }}"></script>
+
+    <!-- Custom Js -->
+    <script>
+        $(".pass-show").on('click', function() {
+            var passwordId = $(this).siblings();
+            if (passwordId.attr("type") === "password") {
+                passwordId.attr("type", "text");
+                $(this).find("svg").removeClass("fa-eye")
+                $(this).find("svg").addClass("fa-eye-slash")
+            } else {
+                passwordId.attr("type", "password");
+                $(this).find("svg").addClass("fa-eye")
+                $(this).find("svg").removeClass("fa-eye-slash")
+            }
+        })
+    </script>
+
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+        }
+
+        @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if(Session::has('info'))
+            toastr.info("{{ Session::get('info') }}");
+        @endif
+
+        @if(Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}");
+        @endif
+
+        @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+    </script>
+</body>
+</html>
