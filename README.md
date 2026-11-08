@@ -2,6 +2,8 @@
 
 **A multilingual learning platform for Jain philosophy, live at [jainenlightened.org](http://www.jainenlightened.org/): a Laravel website with a JSON API and an admin panel, and a React Native app for Android and iOS that reads from the same API.**
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **Links:** [Live site](http://www.jainenlightened.org/) · [Screenshots](#results) · [Setup](#getting-started) · [Arham Doshi](https://arhamdoshi.dev) · [LinkedIn](https://linkedin.com/in/arhamdoshi)
 
 ![Jain Enlightened home page](docs/screenshots/home.png)
@@ -195,6 +197,6 @@ This repository does not include uploaded media (images, videos, and documents a
 
 ## License
 
-All rights reserved. The source is public for viewing, and no license is granted to reuse it. Built by [Arham Doshi](https://arhamdoshi.dev).
+MIT, see [LICENSE](LICENSE). Built by [Arham Doshi](https://arhamdoshi.dev).
 
 Contributions are by invitation or through issues. See [CONTRIBUTING.md](CONTRIBUTING.md). To report a security problem, see [SECURITY.md](SECURITY.md).
