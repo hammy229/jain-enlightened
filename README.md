@@ -1,10 +1,20 @@
 # Jain Enlightened
 
-A multilingual learning platform for Jain philosophy. It has a Laravel website with an admin panel and a React Native mobile app.
+**A multilingual learning platform for Jain philosophy, live at [jainenlightened.org](http://www.jainenlightened.org/): a Laravel website with a JSON API and an admin panel, and a React Native app for Android and iOS that reads from the same API.**
 
-**Live site:** [www.jainenlightened.org](http://www.jainenlightened.org/)
+**Links:** [Live site](http://www.jainenlightened.org/) · [Screenshots](#results) · [Setup](#getting-started) · [Arham Doshi](https://arhamdoshi.dev) · [LinkedIn](https://linkedin.com/in/arhamdoshi)
 
-## Screenshots
+![Jain Enlightened home page](docs/screenshots/home.png)
+
+## Results
+
+| Claim | Measured | How it is checked |
+|---|---|---|
+| It is live | The production site at jainenlightened.org serves lessons, blogs, podcasts, research, and a gallery | Visit the site, or see the screenshots below |
+| It reaches people in their own language | Lessons can be filtered by Gujarati, Hindi, and English | The lessons page and `web/resources/views` |
+| It is a full platform, not a static site | 149 web routes, 22 JSON API routes, 56 controllers, and 32 database migrations | `web/routes`, `web/app/Http/Controllers`, `web/database/migrations` |
+| One backend serves web and mobile | The React Native app's 25 screens load their content from the site's API | `mobile/src`, `mobile/src/api/api.js` |
+| It was published without leaking anything | Credentials, uploads, real data, and the database dump were stripped and checked before release | [SANITIZATION_REPORT.md](SANITIZATION_REPORT.md) |
 
 | Home | Lessons |
 |---|---|
@@ -14,7 +24,24 @@ A multilingual learning platform for Jain philosophy. It has a Laravel website w
 |---|---|
 | ![Blogs page](docs/screenshots/blogs.png) | ![Research page with books and publishing](docs/screenshots/research.png) |
 
-## Features
+## Why it matters
+
+Jain philosophy is taught mostly in person and in Gujarati or Hindi, which makes it hard to reach for younger people abroad and for anyone outside a temple community. Jain Enlightened puts lessons, research, and talks in one place, in the language a learner reads best, on the web and on their phone. The admin panel lets editors keep it up to date without touching code.
+
+## How it works
+
+1. **Website.** Laravel renders the public pages: lessons, blogs, podcasts, research, gallery, impact, and contact and internship forms.
+2. **Admin panel.** At `/admin`, editors manage every content type, enquiries, and system users.
+3. **API.** The same Laravel app serves a JSON API at `/api`, with Sanctum for auth.
+4. **Mobile app.** React Native fetches a bootstrap response, learns the API base URL from it, and renders the same content natively.
+
+| Choice | Why |
+|---|---|
+| One Laravel app for site, admin, and API | One codebase and one database to run and deploy |
+| The app reads its API URL from a bootstrap response | The backend can move without shipping a new app build |
+| Secrets only through `.env` and Gradle properties | Nothing sensitive lives in the repository |
+
+### Features
 
 - Lessons, which can be filtered by language
 - Blogs, podcasts, research, gallery (images and videos), and impact pages
@@ -23,15 +50,6 @@ A multilingual learning platform for Jain philosophy. It has a Laravel website w
 - Admin panel for managing site content, enquiries, and system users
 - Mobile app that reads its content from the web API
 - Chatbot embed (Fastbots) in the mobile app and the web footer
-
-## Repository layout
-
-```
-web/      Laravel website, JSON API (/api), and admin panel (/admin)
-mobile/   React Native app for Android and iOS
-```
-
-See [CLAUDE.md](CLAUDE.md) for the architecture and key files.
 
 ## Tech stack
 
@@ -49,15 +67,13 @@ See [CLAUDE.md](CLAUDE.md) for the architecture and key files.
 - Node.js 16 or newer (`engines` in `package.json`)
 - Jest and ESLint
 
-## Prerequisites
+## Getting started
 
 - Git
 - Node.js 16 or newer, and npm
 - PHP 8.1 or newer, and Composer (web)
 - MySQL or a compatible database (web)
 - For mobile builds: Android SDK and a JDK for Android, or Xcode and CocoaPods (via the `Gemfile`) for iOS
-
-## Quick start
 
 ```bash
 git clone https://github.com/hammy229/jain-enlightened.git
@@ -67,7 +83,7 @@ cd jain-enlightened
 
 `setup.sh` checks for the required tools, creates `web/.env` from `web/.env.example` if it does not exist, and installs the Composer and npm dependencies. It does not start any services.
 
-## Setup: web
+### Setup: web
 
 The public copy does not include a database. Set one up from the migrations and seeders.
 
@@ -91,7 +107,7 @@ The public copy does not include a database. Set one up from the migrations and 
 
 Run `php artisan db:seed` once on a fresh database. The seeders use plain inserts, so running them again creates duplicate rows.
 
-## Setup: mobile
+### Setup: mobile
 
 ```bash
 cd mobile
@@ -113,15 +129,15 @@ npm run ios
 
 More detail is in [mobile/README.md](mobile/README.md).
 
-## Configuration
+### Configuration
 
-### Web
+#### Web
 
 All web configuration comes from `web/.env`. Copy from `web/.env.example`, which documents each key. Never commit `web/.env`.
 
 Key settings: `APP_KEY`, `APP_URL`, `DB_*`, `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, and `FASTBOTS_BOT_ID` (optional, enables the chatbot embed in the web footer).
 
-### Mobile placeholders
+#### Mobile placeholders
 
 The public copy uses placeholders. Replace them before you build the app for your own deployment.
 
@@ -129,7 +145,7 @@ The public copy uses placeholders. Replace them before you build the app for you
 - `mobile/src/components/modal/ChatBotModal.tsx`: `YOUR_FASTBOTS_BOT_ID` in the chatbot embed URL.
 - `mobile/ios/JainEnlightened.xcodeproj`: `DEVELOPMENT_TEAM = YOUR_TEAM_ID`. Set your team in Xcode under Signing & Capabilities for the JainEnlightened target rather than committing your team ID.
 
-### Release signing (Android)
+#### Release signing (Android)
 
 Release builds read four Gradle properties: `JAIN_RELEASE_STORE_FILE`, `JAIN_RELEASE_STORE_PASSWORD`, `JAIN_RELEASE_KEY_ALIAS`, and `JAIN_RELEASE_KEY_PASSWORD` (see `mobile/android/app/build.gradle`). Put them in your user `~/.gradle/gradle.properties`, or pass them on the command line. Keep the keystore and passwords outside this repository.
 
@@ -142,11 +158,16 @@ cd mobile/android
   -PJAIN_RELEASE_KEY_PASSWORD=your-key-password
 ```
 
-## What this public copy excludes
+## Project structure
 
-This repository does not include uploaded media (images, videos, and documents added through the admin panel), real data, a database dump, or credentials. Because of this, some images will appear broken when you run the site or app locally. Set up your own content through the admin panel, or add your own media.
+```
+web/      Laravel website, JSON API (/api), and admin panel (/admin)
+mobile/   React Native app for Android and iOS
+```
 
-## Development
+[CLAUDE.md](CLAUDE.md) describes the architecture and key files in more detail.
+
+## Testing
 
 ```bash
 # Web
@@ -165,18 +186,15 @@ Notes on the current state of the repository:
 - The web `package.json` defines `dev` and `build` scripts that use Vite, but there is no `vite.config.js` in `web/`. `webpack.mix.js` refers to laravel-mix, which is not listed in `package.json`. Treat front-end asset builds as not set up.
 - The web tests are the default Laravel examples. There is no `phpunit.xml`, so the test suite is not a working check of the app.
 
-## Using with Claude Code
+## Limitations and next steps
 
-This project includes a `CLAUDE.md` that gives Claude Code full context: commands, architecture, key files, and configuration.
+This repository does not include uploaded media (images, videos, and documents added through the admin panel), real data, a database dump, or credentials. Because of this, some images will appear broken when you run the site or app locally. Set up your own content through the admin panel, or add your own media.
 
-```bash
-claude    # Start Claude Code in the repo root. It reads CLAUDE.md automatically
-```
+- Front-end asset builds for the web app are not set up (see Testing).
+- The web tests are Laravel's default examples, and the mobile app has one render test. Real test coverage is the main next step.
 
 ## License
 
-All rights reserved. The source is public for viewing; no license is granted to reuse it.
-
-## Contributing
+All rights reserved. The source is public for viewing, and no license is granted to reuse it. Built by [Arham Doshi](https://arhamdoshi.dev).
 
 Contributions are by invitation or through issues. See [CONTRIBUTING.md](CONTRIBUTING.md). To report a security problem, see [SECURITY.md](SECURITY.md).
