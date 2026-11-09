@@ -88,4 +88,4 @@ echo "  4. Mobile: cd mobile && npm start (see mobile/README.md for Android and 
 echo "  5. Mobile placeholders: BOOTSTRAP_URL (mobile/src/api/api.js),"
 echo "     YOUR_FASTBOTS_BOT_ID (mobile/src/components/modal/ChatBotModal.tsx),"
 echo "     YOUR_TEAM_ID (iOS project)"
-echo "  6. Using Claude Code? CLAUDE.md has all the context."
+echo "  6. ARCHITECTURE.md describes the code layout and key files."

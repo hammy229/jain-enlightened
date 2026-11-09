@@ -25,6 +25,3 @@ Run `./setup.sh` from the repository root, then follow [README.md](README.md) fo
 - **Web (PHP):** format with Laravel Pint: `cd web && ./vendor/bin/pint`. Follow the existing controller and route patterns in `web/routes/`.
 - **Mobile (TypeScript and JavaScript):** run `cd mobile && npm run lint`. Prettier settings in `mobile/.prettierrc.js` use single quotes, trailing commas, and no spaces inside object braces.
 
-## Using Claude Code
-
-This repository includes a `CLAUDE.md` with commands, architecture, and key files. Start Claude Code from the repository root with `claude`, and it will read that file automatically. Ask it to follow the code style above and to check the commands in `CLAUDE.md` before you rely on them.

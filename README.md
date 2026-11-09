@@ -167,7 +167,7 @@ web/      Laravel website, JSON API (/api), and admin panel (/admin)
 mobile/   React Native app for Android and iOS
 ```
 
-[CLAUDE.md](CLAUDE.md) describes the architecture and key files in more detail.
+[ARCHITECTURE.md](ARCHITECTURE.md) describes the architecture and key files in more detail.
 
 ## Testing
 

@@ -58,7 +58,6 @@ Thumbs.db
 *.map
 *.bak
 *.sqlite
-.claude/
 .idea/
 .vscode/
 __pycache__/
